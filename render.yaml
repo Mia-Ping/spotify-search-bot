@@ -2,8 +2,9 @@ services:
   - type: web
     name: spotify-search-bot
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python setup_production.py
     startCommand: gunicorn app:app
+    pythonVersion: 3.10.13
     envVars:
       - key: SPOTIPY_CLIENT_ID
         value: 112198efe8bc4ae49492ad78031679a8
@@ -21,3 +22,4 @@ services:
       name: spotify-data
       mountPath: /data
       sizeGB: 1
+
