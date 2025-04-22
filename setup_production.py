@@ -1,7 +1,9 @@
 import os
-import shutil
 
-# Create necessary directories in the mounted volume
+# Create necessary directories at runtime, not during build
+# This ensures the disk is properly mounted and writable
+
+# Ensure directories exist
 os.makedirs('/data/flask_session', exist_ok=True)
 os.makedirs('/data/uploads', exist_ok=True)
 
