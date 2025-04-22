@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Music Search Bot - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-container">
+            <h1>Spotify Music Search Bot</h1>
+            <p>Find the perfect song from your playlists with advanced search capabilities</p>
+            <a href="{{ url_for('login') }}" class="spotify-login-btn">Login with Spotify</a>
+            
+            <div class="features">
+                <h2>Features</h2>
+                <ul>
+                    <li>Search your playlists with descriptive terms like "delighted female vocal" or "songs for travelling"</li>
+                    <li>Identify songs playing around you with audio recognition</li>
+                    <li>Find songs by humming a melody</li>
+                    <li>Get song recommendations based on your search</li>
+                    <li>Add discovered songs to your Liked Songs playlist</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

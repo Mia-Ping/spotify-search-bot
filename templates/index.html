@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Music Search Bot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Spotify Music Search Bot</h1>
+            <div class="user-info">
+                {% if user_info.images and user_info.images|length > 0 %}
+                <img src="{{ user_info.images[0].url }}" alt="Profile" class="profile-pic">
+                {% endif %}
+                <span>{{ user_info.display_name }}</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="search-container">
+            <div class="search-tabs">
+                <button class="tab-btn active" data-tab="text-search">Text Search</button>
+                <button class="tab-btn" data-tab="audio-search">Audio Search</button>
+                <button class="tab-btn" data-tab="humming-search">Humming Search</button>
+            </div>
+            
+            <div id="text-search" class="tab-content active">
+                <h2>Search Your Playlists</h2>
+                <form id="text-search-form">
+                    <input type="text" id="search-query" placeholder="Enter descriptive terms (e.g., 'delighted female vocal', 'songs for travelling')" required>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+            </div>
+            
+            <div id="audio-search" class="tab-content">
+                <h2>Identify Songs</h2>
+                <div class="audio-controls">
+                    <button id="record-btn" class="record-btn">Start Recording</button>
+                    <span id="record-timer" class="timer">00:00</span>
+                </div>
+                <p>Click "Start Recording" and play the song you want to identify. Click "Stop Recording" when done.</p>
+                
+                <div class="upload-container">
+                    <h3>Or Upload Audio File</h3>
+                    <form id="audio-upload-form">
+                        <input type="file" id="audio-file" accept="audio/*" required>
+                        <button type="submit" class="upload-btn">Upload & Identify</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div id="humming-search" class="tab-content">
+                <h2>Find Songs by Humming</h2>
+                <div class="audio-controls">
+                    <button id="hum-record-btn" class="record-btn">Start Humming</button>
+                    <span id="hum-timer" class="timer">00:00</span>
+                </div>
+                <p>Click "Start Humming" and hum or sing a part of the song you're looking for. Click "Stop Humming" when done.</p>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <h2>Results</h2>
+            <div id="search-results" class="results-list">
+                <div class="empty-state">
+                    Use the search options above to find songs
+                </div>
+            </div>
+        </div>
+        
+        <div class="playlists-container">
+            <h2>Your Playlists</h2>
+            <div class="playlists-list">
+                {% for playlist in playlists.items %}
+                <div class="playlist-item" data-id="{{ playlist.id }}">
+                    {% if playlist.images and playlist.images|length > 0 %}
+                    <img src="{{ playlist.images[0].url }}" alt="{{ playlist.name }}">
+                    {% else %}
+                    <div class="playlist-placeholder"></div>
+                    {% endif %}
+                    <span>{{ playlist.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
