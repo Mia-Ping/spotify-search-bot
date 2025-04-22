@@ -2,7 +2,7 @@ services:
   - type: web
     name: spotify-search-bot
     env: python
-    buildCommand: apt-get update && apt-get install -y portaudio19-dev python3-dev && pip install -r requirements.txt && python setup_production.py
+    buildCommand: apt-get update && apt-get install -y portaudio19-dev python3-dev && pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: SPOTIPY_CLIENT_ID
@@ -21,4 +21,5 @@ services:
       name: spotify-data
       mountPath: /data
       sizeGB: 1
+
 
